@@ -1,0 +1,136 @@
+/* Página Resumen pedido - diseño ticket */
+.resumen-pedido__wrap {
+  max-width: 420px;
+  margin: 0 auto 2rem;
+}
+
+.resumen-pedido__ticket {
+  background: #fff;
+  border: 2px solid #333;
+  border-radius: 4px;
+  padding: 1.25rem 1.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.resumen-pedido__ticket-header {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.resumen-pedido__ticket-titulo {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin: 0 0 0.2rem 0;
+  letter-spacing: 0.02em;
+}
+
+.resumen-pedido__ticket-sub {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+}
+
+.resumen-pedido__ticket-linea {
+  border-bottom: 1px dashed #999;
+  margin: 0.6rem 0;
+}
+
+.resumen-pedido__ticket-id,
+.resumen-pedido__ticket-fecha,
+.resumen-pedido__ticket-cliente,
+.resumen-pedido__ticket-listaprecio {
+  margin: 0.25rem 0;
+  font-size: 0.85rem;
+}
+
+.resumen-pedido__ticket-id {
+  font-weight: 700;
+}
+
+.resumen-pedido__ticket-items {
+  margin: 0.5rem 0;
+  font-size: 0.85rem;
+}
+
+.resumen-pedido__ticket-item {
+  display: flex;
+  justify-content: space-between;
+  margin: 0.35rem 0;
+  gap: 0.75rem;
+}
+
+.resumen-pedido__ticket-item-nombre {
+  flex: 1;
+  min-width: 0;
+}
+
+.resumen-pedido__ticket-item-cant {
+  flex-shrink: 0;
+}
+
+.resumen-pedido__ticket-item-monto {
+  flex-shrink: 0;
+  text-align: right;
+  min-width: 4rem;
+}
+
+.resumen-pedido__ticket-total {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin: 0.5rem 0 0 0;
+  text-align: right;
+}
+
+.resumen-pedido__ticket-footer {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.resumen-pedido__acciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.resumen-pedido__btn {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  text-align: center;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius);
+  transition: opacity 0.15s;
+}
+
+.resumen-pedido__btn:hover {
+  opacity: 0.9;
+}
+
+.resumen-pedido__btn-whatsapp {
+  background: #25D366;
+  color: #fff;
+  border: none;
+}
+
+.resumen-pedido__btn-nuevo {
+  background: var(--color-primary);
+  color: #fff;
+  border: none;
+}
+
+.resumen-pedido__btn-inicio {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.resumen-pedido__sin-datos {
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 2rem;
+}

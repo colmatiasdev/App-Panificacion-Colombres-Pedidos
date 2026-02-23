@@ -6,80 +6,87 @@
   'use strict';
 
   var Tables = {
+    /** Tabla CLIENTES: hoja "CLIENTES". PK = ID-CLIENTE */
+    CLIENTES: {
+      sheet: 'CLIENTES',
+      pk: 'ID-CLIENTE',
+      columns: ['ID-CLIENTE', 'NOMBRE-APELLIDO', 'TIPO-LISTA-PRECIO', 'WHATSAPP', 'OBSERVACION', 'HABILITADO']
+    },
+
     /** Tabla PRODUCTOS: hoja "PRODUCTOS". PK = ID-PRODUCTO */
     PRODUCTOS: {
       sheet: 'PRODUCTOS',
       pk: 'ID-PRODUCTO',
-      columns: ['ID-PRODUCTO', 'CATEGORIA', 'NOMBRE-PRODUCTO', 'PRECIO', 'HABILITADO']
+      columns: ['ID-PRODUCTO', 'CATEGORIA', 'NOMBRE-PRODUCTO', 'PRECIO-MAYORISTA', 'PRECIO-DISTRIBUIDOR', 'HABILITADO']
     },
 
-    /** Tablas de ventas por mes. PK = ID-VENTA (puede haber varias filas por venta). */
+    /** Tablas de pedidos por mes. PK = ID-PEDIDO (puede haber varias filas por pedido). */
     ENERO: {
       sheet: 'ENERO',
-      pk: 'ID-VENTA',
-      columns: ['ID-VENTA', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
+      pk: 'ID-PEDIDO',
+      columns: ['ID-PEDIDO', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'NOMBRE-APELLIDO', 'TIPO-LISTA-PRECIO','ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
     },
     FEBRERO: {
       sheet: 'FEBRERO',
-      pk: 'ID-VENTA',
-      columns: ['ID-VENTA', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
+      pk: 'ID-PEDIDO',
+      columns: ['ID-PEDIDO', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'NOMBRE-APELLIDO', 'TIPO-LISTA-PRECIO','ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
     },
     MARZO: {
       sheet: 'MARZO',
-      pk: 'ID-VENTA',
-      columns: ['ID-VENTA', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
+      pk: 'ID-PEDIDO',
+      columns: ['ID-PEDIDO', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'NOMBRE-APELLIDO', 'TIPO-LISTA-PRECIO','ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
     },
     ABRIL: {
       sheet: 'ABRIL',
-      pk: 'ID-VENTA',
-      columns: ['ID-VENTA', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
+      pk: 'ID-PEDIDO',
+      columns: ['ID-PEDIDO', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'NOMBRE-APELLIDO', 'TIPO-LISTA-PRECIO','ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
     },
     MAYO: {
       sheet: 'MAYO',
-      pk: 'ID-VENTA',
-      columns: ['ID-VENTA', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
+      pk: 'ID-PEDIDO',
+      columns: ['ID-PEDIDO', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'NOMBRE-APELLIDO', 'TIPO-LISTA-PRECIO','ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
     },
     JUNIO: {
       sheet: 'JUNIO',
-      pk: 'ID-VENTA',
-      columns: ['ID-VENTA', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
+      pk: 'ID-PEDIDO',
+      columns: ['ID-PEDIDO', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'NOMBRE-APELLIDO', 'TIPO-LISTA-PRECIO','ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
     },
     JULIO: {
       sheet: 'JULIO',
-      pk: 'ID-VENTA',
-      columns: ['ID-VENTA', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
+      pk: 'ID-PEDIDO',
+      columns: ['ID-PEDIDO', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'NOMBRE-APELLIDO', 'TIPO-LISTA-PRECIO','ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
     },
     AGOSTO: {
       sheet: 'AGOSTO',
-      pk: 'ID-VENTA',
-      columns: ['ID-VENTA', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
+      pk: 'ID-PEDIDO',
+      columns: ['ID-PEDIDO', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'NOMBRE-APELLIDO', 'TIPO-LISTA-PRECIO','ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
     },
     SEPTIEMBRE: {
       sheet: 'SEPTIEMBRE',
-      pk: 'ID-VENTA',
-      columns: ['ID-VENTA', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
+      pk: 'ID-PEDIDO',
+      columns: ['ID-PEDIDO', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'NOMBRE-APELLIDO', 'TIPO-LISTA-PRECIO','ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
     },
     OCTUBRE: {
       sheet: 'OCTUBRE',
-      pk: 'ID-VENTA',
-      columns: ['ID-VENTA', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
+      pk: 'ID-PEDIDO',
+      columns: ['ID-PEDIDO', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'NOMBRE-APELLIDO', 'TIPO-LISTA-PRECIO','ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
     },
     NOVIEMBRE: {
       sheet: 'NOVIEMBRE',
-      pk: 'ID-VENTA',
-      columns: ['ID-VENTA', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
+      pk: 'ID-PEDIDO',
+      columns: ['ID-PEDIDO', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'NOMBRE-APELLIDO', 'TIPO-LISTA-PRECIO','ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
     },
     DICIEMBRE: {
       sheet: 'DICIEMBRE',
-      pk: 'ID-VENTA',
-      columns: ['ID-VENTA', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
+      pk: 'ID-PEDIDO',
+      columns: ['ID-PEDIDO', 'AÑO', 'FECHA_OPERATIVA', 'HORA', 'NOMBRE-APELLIDO', 'TIPO-LISTA-PRECIO','ID-PRODUCTO', 'CATEGORIA', 'PRODUCTO', 'CANTIDAD', 'PRECIO', 'MONTO']
     },
 
-    /** Tabla RESUMEN-VENTAS: resumen por mes, día, categoría y producto. */
-    RESUMEN_VENTAS: {
-      sheet: 'RESUMEN-VENTAS',
-      pk: 'MES',
-      columns: ['MES', 'DIA', 'CATEGORIA', 'NOMBRE-PRODUCTO', 'CANTIDAD', 'MONTO']
+    /** Tabla USUARIOS: hoja "USUARIOS". PK = ID-USUARIO */
+    USUARIOS: {
+      sheet: 'USUARIOS',
+      pk: 'ID-USUARIO',
+      columns: ['ID-USUARIO', 'NOMBRE-USUARIO', 'PASSWORD', 'NOMBRE', 'APELLIDO', 'EMAIL', 'WHATSAPP', 'PERFIL', 'HABILITADO', 'FECHA-ALTA']
     }
   };
 

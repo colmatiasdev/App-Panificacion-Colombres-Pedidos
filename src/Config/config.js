@@ -8,10 +8,10 @@
   var Config = {
     /** URL pública del Google Sheet en formato CSV (solo lectura). */
     GOOGLE_SHEET_CSV_URL:
-      'https://docs.google.com/spreadsheets/d/e/2PACX-1vRNYUmSj5Zpu85PtNg_8ZQPXbj1HsL8H8Or06RpoHpDW5EPj4TpXwVWvumDpujNQdlBnQhXDIujlt2A/pub?output=csv',
+      'https://docs.google.com/spreadsheets/d/e/2PACX-1vSIUBR1fiteyhunTC-P9XGqTY8GvNlgOLLwUQQORANReBeKzIQoCGoPaRvGBMHwgC1FJoQB-dqsjtfA/pub?output=csv',
 
     /** URL del Web App de Google Apps Script para operaciones con la hoja (guardar, actualizar, etc.). */
-    APP_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwdLJUkEW2fzegHY68Rml3LilQ1q88fTmqKRXyVpv_igienTQGoE1-5MgoJVM49R_OB/exec',
+    APP_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwhaJh7wov-tD9pyBINJusO4BY_MkvalrvYJ_f1gUlM_52TraM58wAiu0KP7YPvbpQ-pw/exec',
 
     /**
      * Proxy CORS (dejar vacío para enviar directo al Apps Script).

@@ -8,22 +8,16 @@
     links.forEach(function (link) {
       var href = link.getAttribute('href') || '';
       link.classList.remove('nav__link--active');
-      if (path.toLowerCase().indexOf('nueva-venta') !== -1 && href.toLowerCase().indexOf('nueva-venta') !== -1) {
+      if (path.toLowerCase().indexOf('nuevo-pedido') !== -1 && href.toLowerCase().indexOf('nuevo-pedido') !== -1) {
         link.classList.add('nav__link--active');
       }
-      if (path.indexOf('listado-ventas') !== -1 && href.indexOf('listado-ventas') !== -1) {
-        link.classList.add('nav__link--active');
-      }
-      if ((path.indexOf('dashboard') !== -1 || path.indexOf('Dashboard') !== -1) && (href.indexOf('dashboard') !== -1 || href.indexOf('Dashboard') !== -1)) {
-        link.classList.add('nav__link--active');
-      }
-      if (path.indexOf('ventas-por-anio') !== -1 && href.indexOf('ventas-por-anio') !== -1) {
+      if (path.toLowerCase().indexOf('seleccionar-cliente') !== -1 && href.toLowerCase().indexOf('seleccionar-cliente') !== -1) {
         link.classList.add('nav__link--active');
       }
     });
     // Si estamos en index, marcar según hash o dejar la primera
     if (path.endsWith('/') || path.endsWith('index.html') || path === '') {
-      var primera = document.querySelector('.nav__link[href*="Nueva-venta"]');
+      var primera = document.querySelector('.nav__link[href*="Seleccionar-cliente"]');
       if (primera) primera.classList.add('nav__link--active');
     }
   }

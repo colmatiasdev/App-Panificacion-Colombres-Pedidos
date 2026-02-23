@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resumen del pedido - Panificacion Colombres</title>
+  <link rel="stylesheet" href="../../../index.css">
+  <link rel="stylesheet" href="../../Footer/footer.css">
+  <link rel="stylesheet" href="Resumen-pedido.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header__logo">
+      <h1>Panificacion Colombres</h1>
+      <span class="header__subtitle">Sistema de Pedidos</span>
+    </div>
+    <nav class="nav">
+      <ul class="nav__menu">
+        <li class="nav__item">
+          <a href="../../../index.html" class="nav__link">Inicio</a>
+        </li>
+        <li class="nav__item">
+          <a href="../Nuevo-pedido/Nuevo-pedido.html" class="nav__link nav__link--active">Nuevo Pedido</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main">
+    <div class="page-header">
+      <h1>Resumen del pedido</h1>
+    </div>
+
+    <div class="resumen-pedido__wrap">
+      <div class="resumen-pedido__ticket" id="resumen-pedido-ticket">
+        <div class="resumen-pedido__ticket-header">
+          <p class="resumen-pedido__ticket-titulo">Panificacion Colombres</p>
+          <p class="resumen-pedido__ticket-sub">Pedido</p>
+        </div>
+        <div class="resumen-pedido__ticket-linea"></div>
+        <p class="resumen-pedido__ticket-id" id="ticket-id"></p>
+        <p class="resumen-pedido__ticket-fecha" id="ticket-fecha"></p>
+        <p class="resumen-pedido__ticket-cliente" id="ticket-cliente"></p>
+        <p class="resumen-pedido__ticket-listaprecio" id="ticket-listaprecio"></p>
+        <div class="resumen-pedido__ticket-linea"></div>
+        <div class="resumen-pedido__ticket-items" id="ticket-items"></div>
+        <div class="resumen-pedido__ticket-linea"></div>
+        <p class="resumen-pedido__ticket-total" id="ticket-total"></p>
+        <div class="resumen-pedido__ticket-footer">
+          <p>Gracias por su pedido</p>
+        </div>
+      </div>
+
+      <div class="resumen-pedido__acciones">
+        <a href="#" id="resumen-pedido-btn-whatsapp" class="resumen-pedido__btn resumen-pedido__btn-whatsapp" target="_blank" rel="noopener">Compartir por WhatsApp</a>
+        <a href="../Nuevo-pedido/Nuevo-pedido.html" class="resumen-pedido__btn resumen-pedido__btn-nuevo">Nuevo pedido</a>
+        <a href="../../../index.html" class="resumen-pedido__btn resumen-pedido__btn-inicio">Ir al inicio</a>
+      </div>
+    </div>
+
+    <p class="resumen-pedido__sin-datos" id="resumen-pedido-sin-datos" hidden>No hay datos del pedido. Realice un pedido desde Nuevo pedido.</p>
+  </main>
+
+  <div id="footer-container" data-footer-src="../../Footer/footer.html"></div>
+
+  <script src="../../../main.js"></script>
+  <script src="../../Footer/footer.js"></script>
+  <script src="Resumen-pedido.js"></script>
+</body>
+</html>
