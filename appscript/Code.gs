@@ -323,9 +323,10 @@ function ventaAlta(params) {
     ]);
   }
   if (filas.length === 0) return respuestaJson({ ok: true, mensaje: 'Sin ítems.' });
-  var startRow = sheet.getLastRow() + 1;
-  var endRow = startRow + filas.length - 1;
-  sheet.getRange(startRow, 1, endRow, def.columns.length).setValues(filas);
+  // Escribir fila a fila para evitar desajuste de dimensiones (datos vs intervalo)
+  for (var i = 0; i < filas.length; i++) {
+    sheet.appendRow(filas[i]);
+  }
   return respuestaJson({ ok: true, mensaje: 'Pedido guardado.' });
 }
 
