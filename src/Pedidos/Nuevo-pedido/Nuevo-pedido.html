@@ -638,6 +638,13 @@ body {
         </tr>
       </tfoot>
     </table>
+    <div class="np-envio-wrap u-row" id="nuevo-pedido-envio-wrap" style="display:none; margin-top:14px; flex-wrap:wrap; align-items:center; gap:12px;">
+      <label class="np-envio-label" style="display:flex; align-items:center; gap:8px; cursor:pointer; font-weight:700; font-size:0.88rem;">
+        <input type="checkbox" id="nuevo-pedido-envio-activo" aria-label="Incluir costo de envío">
+        Incluir costo de envío
+      </label>
+      <input type="number" id="nuevo-pedido-envio-monto" min="0" step="100" class="c-input" style="width:120px;" aria-label="Monto en pesos" placeholder="0">
+    </div>
     <hr class="c-hr" style="margin-top:16px;">
     <div class="np-save-row">
       <button type="button" id="nuevo-pedido-btn-guardar" class="c-btn c-btn--primary" disabled>Guardar pedido</button>
@@ -658,6 +665,8 @@ body {
   var APP_SCRIPT_URL = window.APP_CONFIG  && window.APP_CONFIG.APP_SCRIPT_URL;
   var CORS_PROXY     = window.APP_CONFIG  && window.APP_CONFIG.CORS_PROXY;
   var NEGOCIO        = window.APP_NEGOCIO;
+  var COSTO_ENVIO_DEFECTO = window.APP_CONFIG && (window.APP_CONFIG.COSTO_ENVIO_DEFECTO != null ? Number(window.APP_CONFIG.COSTO_ENVIO_DEFECTO) : null);
+  var ID_PRODUCTO_ENVIO   = window.APP_CONFIG && (window.APP_CONFIG.ID_PRODUCTO_ENVIO || '').trim() || null;
   var productos=[], clientes=[], clienteSeleccionado=null, carrito=[];
 
   function escapeHtml(s){if(s==null)return'';var d=document.createElement('div');d.textContent=s;return d.innerHTML;}
@@ -787,6 +796,7 @@ body {
     if(vacio)vacio.hidden=true; if(tabla)tabla.hidden=false; actualizarEstadoGuardar();
     var trash='<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>';
     var total=0; tbody.innerHTML='';
+    var envioMonto=getEnvioMonto();
     carrito.forEach(function(item){
       var id=item.producto[TABLA.pk]; var subtotal=item.producto.PRECIO*item.cantidad; total+=subtotal;
       var tr=document.createElement('tr');
@@ -801,9 +811,20 @@ body {
       tr.querySelector('.js-quitar').addEventListener('click',function(){quitarDelCarrito(id);});
       minus.disabled=item.cantidad<=1; tbody.appendChild(tr);
     });
+    total+=envioMonto;
     if(totalEl)totalEl.textContent=fmt(total);
   }
   function getTotalPedido(){return carrito.reduce(function(s,it){return s+it.producto.PRECIO*it.cantidad;},0);}
+  function isEnvioDisponible(){return COSTO_ENVIO_DEFECTO!=null&&ID_PRODUCTO_ENVIO;}
+  function isEnvioActivo(){
+    if(!isEnvioDisponible())return false;
+    var cb=document.getElementById('nuevo-pedido-envio-activo'); return cb&&cb.checked;
+  }
+  function getEnvioMonto(){
+    if(!isEnvioDisponible()||!isEnvioActivo())return 0;
+    var inp=document.getElementById('nuevo-pedido-envio-monto'); if(!inp)return 0;
+    var n=parseFloat(String(inp.value).replace(',','.'),10); return isNaN(n)||n<0?0:n;
+  }
   function guardarResumenYRedirigir(payload){
     var resumen={idVenta:payload.idVenta,idPedido:payload.idVenta,fechaOperativa:payload.fechaOperativa||'',hora:payload.hora||'',clienteNombre:payload.nombreApellido||'',clienteTipoLista:payload.tipoListaPrecio||'',items:(payload.items||[]).map(function(it){return{producto:it.producto,cantidad:it.cantidad,precio:it.precio,monto:it.monto!==undefined?it.monto:it.precio*it.cantidad};}),total:payload.total||0};
     try{sessionStorage.setItem('ultimoPedidoResumen',JSON.stringify(resumen));}catch(e){}
@@ -816,8 +837,15 @@ body {
     if(!NEGOCIO||!NEGOCIO.getFechaOperativa){setMsgGuardar('Falta cargar negocio.js',true);return;}
     var fechaOp=NEGOCIO.getFechaOperativa(), hoja=NEGOCIO.getNombreHojaMes(fechaOp);
     var ahora=new Date(), hora=ahora.getHours()+':'+(ahora.getMinutes()<10?'0':'')+ahora.getMinutes();
-    var idVenta='P-'+Date.now(), total=getTotalPedido();
-    var payload={accion:'guardarVenta',hoja:hoja,idVenta:idVenta,fechaOperativa:fechaOp,hora:hora,nombreApellido:clienteSeleccionado['NOMBRE-APELLIDO']||'',tipoListaPrecio:clienteSeleccionado['TIPO-LISTA-PRECIO']||'',total:total,items:carrito.map(function(it){return{idProducto:it.producto[TABLA.pk],categoria:it.producto.CATEGORIA,producto:it.producto['NOMBRE-PRODUCTO'],cantidad:it.cantidad,precio:it.producto.PRECIO,monto:it.producto.PRECIO*it.cantidad};})};
+    var idVenta='P-'+Date.now();
+    var items=carrito.map(function(it){return{idProducto:it.producto[TABLA.pk],categoria:it.producto.CATEGORIA,producto:it.producto['NOMBRE-PRODUCTO'],cantidad:it.cantidad,precio:it.producto.PRECIO,monto:it.producto.PRECIO*it.cantidad};});
+    var montoEnvio=0;
+    if(isEnvioActivo()){
+      montoEnvio=getEnvioMonto();
+      if(montoEnvio>0) items.push({idProducto:ID_PRODUCTO_ENVIO,categoria:'Envío',producto:'Gasto de envío',cantidad:1,precio:montoEnvio,monto:montoEnvio});
+    }
+    var total=getTotalPedido()+montoEnvio;
+    var payload={accion:'guardarVenta',hoja:hoja,idVenta:idVenta,fechaOperativa:fechaOp,hora:hora,nombreApellido:clienteSeleccionado['NOMBRE-APELLIDO']||'',tipoListaPrecio:clienteSeleccionado['TIPO-LISTA-PRECIO']||'',total:total,items:items};
     var btn=document.getElementById('nuevo-pedido-btn-guardar');if(btn)btn.disabled=true;
     setMsgGuardar('Guardando…');
     llamarAppScript(payload).then(function(data){
@@ -838,6 +866,16 @@ body {
     if(btnLimpiar)btnLimpiar.addEventListener('click',function(){var inp=document.getElementById('nuevo-pedido-buscar');if(inp){inp.value='';inp.focus();}pintarListado();});
     var btnGuardar=document.getElementById('nuevo-pedido-btn-guardar');
     if(btnGuardar)btnGuardar.addEventListener('click',guardarPedido);
+    if(isEnvioDisponible()){
+      var wrapEnvio=document.getElementById('nuevo-pedido-envio-wrap');
+      var inpEnvio=document.getElementById('nuevo-pedido-envio-monto');
+      if(wrapEnvio)wrapEnvio.style.display='flex';
+      if(inpEnvio&&COSTO_ENVIO_DEFECTO!=null)inpEnvio.value=COSTO_ENVIO_DEFECTO;
+      var cbEnvio=document.getElementById('nuevo-pedido-envio-activo');
+      function actualizarEnvio(){pintarResumen();}
+      if(cbEnvio)cbEnvio.addEventListener('change',actualizarEnvio);
+      if(inpEnvio)inpEnvio.addEventListener('input',actualizarEnvio);
+    }
     cargarClientes(); cargarProductos();
   }
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}

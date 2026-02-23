@@ -11,6 +11,6 @@
       container.innerHTML = html;
     })
     .catch(function () {
-      container.innerHTML = '<footer class="footer"><p>&copy; Panificacion Colombres</p></footer>';
+      container.innerHTML = '<footer class="footer"><p>&copy; Panificación Colombres</p></footer>';
     });
 })();

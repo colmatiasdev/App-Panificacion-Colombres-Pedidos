@@ -16,14 +16,13 @@
 
   function construirTextoWhatsApp(data) {
     var lineas = [];
-    lineas.push('*Panificacion Colombres*');
+    lineas.push('*Panificación Colombres*');
     lineas.push('Pedido');
     lineas.push('──────────────');
     lineas.push('ID: ' + (data.idPedido || data.idVenta || ''));
     lineas.push('Fecha: ' + (data.fechaOperativa || ''));
     lineas.push('Hora: ' + (data.hora || ''));
     lineas.push('Cliente: ' + (data.clienteNombre || ''));
-    if (data.clienteTipoLista) lineas.push('Lista: ' + data.clienteTipoLista);
     lineas.push('──────────────');
     if (data.items && data.items.length) {
       data.items.forEach(function (it) {
@@ -68,7 +67,8 @@
     document.getElementById('ticket-id').textContent = 'ID: ' + (data.idPedido || data.idVenta || '');
     document.getElementById('ticket-fecha').textContent = 'Fecha: ' + (data.fechaOperativa || '') + '  Hora: ' + (data.hora || '');
     document.getElementById('ticket-cliente').textContent = 'Cliente: ' + (data.clienteNombre || '');
-    document.getElementById('ticket-listaprecio').textContent = data.clienteTipoLista ? 'Lista: ' + data.clienteTipoLista : '';
+    document.getElementById('ticket-listaprecio').textContent = '';
+    document.getElementById('ticket-listaprecio').style.display = 'none';
 
     var itemsHtml = '';
     if (data.items && data.items.length) {
