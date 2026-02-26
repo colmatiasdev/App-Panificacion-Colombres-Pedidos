@@ -16,21 +16,19 @@
 
   function construirTextoWhatsApp(data) {
     var lineas = [];
-    lineas.push('*Panificación Colombres*');
-    lineas.push('Pedido');
+    lineas.push('Pedido: *Panificación Colombres*');
     lineas.push('──────────────');
     lineas.push('ID: ' + (data.idPedido || data.idVenta || ''));
     lineas.push('Fecha: ' + (data.fechaOperativa || ''));
     lineas.push('Hora: ' + (data.hora || ''));
     lineas.push('Cliente: ' + (data.clienteNombre || ''));
     lineas.push('──────────────');
+    lineas.push('Detalles del pedido:');
     if (data.items && data.items.length) {
       data.items.forEach(function (it) {
-        lineas.push(it.cantidad + ' x ' + (it.producto || '') + ' - ' + formatearPrecio(it.monto || it.precio * it.cantidad));
+        lineas.push((it.cantidad || 0) + ' x ' + (it.producto || ''));
       });
     }
-    lineas.push('──────────────');
-    lineas.push('TOTAL: ' + formatearPrecio(data.total || 0));
     lineas.push('──────────────');
     lineas.push('Gracias por su pedido');
     return lineas.join('\n');
